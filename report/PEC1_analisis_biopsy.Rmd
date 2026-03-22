@@ -12,8 +12,11 @@ output:
     keep_tex: false
     includes:
       in_header: preamble.tex
+  word_document:
+    toc: true
+    toc_depth: '3'
 classoption: twoside
-geometry: "top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm"
+geometry: top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm
 fontsize: 11pt
 lang: es
 ---
@@ -169,14 +172,20 @@ biopsy_clean <- na.omit(biopsy)
 any(is.na(biopsy_clean))
 ```
 
-Como se puede comprobar a través de la salida, el nuevo conjunto de datos *`biopsy_clean`* no presenta valores perdidos. 
+```{r}
+# Contar número de filas eliminadas
+n_removed <- nrow(biopsy) - nrow(biopsy_clean)
+n_removed
+```
 
-En el caso concreto del conjunto de datos *`biopsy`*, la eliminación de casos completos no debe suponer un problema relevante, ya que, tal y como se vio anteriormente, el porcentaje de valores perdidos en este caso es muy reducido (0,2%) y, además, se encuentran concentrados únicamante en la variable "**`bare_nuclei`**". En este sentido, al eliminar dichas observaciones se esataría perdiendo una fracción muy pequeña de la muestra, lo que no debe producir un impacto significativo en términos de representatividad y, por tanto, no debería implicar alteraciones en los resultados posteriores del análisis. Sin embargo, si se hubiera dado una proporción mayor de valores perdidos o estos se hubieran encontrado distribuidos en múltiples variables, la eliminación de casos completos si podría afectar al tamaño muestral e introducir sesgos en el análisis. En este caso, sería necesario plantear otras estrategias más adecuadas como, por ejemplo, la aplicación de metodologías de imputación de variables.
+Como se puede comprobar a través de la salida, el nuevo conjunto de datos *`biopsy_clean`* no presenta valores perdidos y, concretamente **se han eliminado un total de 16 filas**.
+
+En el caso concreto del conjunto de datos *`biopsy`*, la eliminación de casos completos no debe suponer un problema relevante, ya que, tal y como se vio anteriormente, el porcentaje de valores perdidos en este caso es muy reducido (0,2%) y, además, se encuentran concentrados únicamente en la variable "**`bare_nuclei`**". En este sentido, al eliminar dichas observaciones se estaría perdiendo una fracción muy pequeña de la muestra, lo que no debe producir un impacto significativo en términos de representatividad y, por tanto, no debería implicar alteraciones en los resultados posteriores del análisis. Sin embargo, si se hubiera dado una proporción mayor de valores perdidos o estos se hubieran encontrado distribuidos en múltiples variables, la eliminación de casos completos si podría afectar al tamaño muestral e introducir sesgos en el análisis. En este caso, sería necesario plantear otras estrategias más adecuadas como, por ejemplo, la aplicación de metodologías de imputación de variables.
 
 
 ## Exportación del conjunto de datos *`biopsy_clean`*
 
-Se procede a exportar el data frame depurado a un fichero llamado "*`biopsy_clean.csv`*" sin incluir los números de fila. Para ello, se crea, si no exite, el directorio "*`data`*" en la raíz del proyecto empleando funciones de manipulación de directorios y permisos de archivos del paquete **`base`**:
+Se procede a exportar el data frame depurado a un fichero llamado "*`biopsy_clean.csv`*" sin incluir los números de fila. Para ello, se crea, si no existe, el directorio "*`data`*" en la raíz del proyecto empleando funciones de manipulación de directorios y permisos de archivos del paquete **`base`**:
 
 ```{r}
 # Crear directorio data en la raíz del proyecto (si no está creado)
@@ -208,7 +217,7 @@ names(biopsy_check)
 
 A la hora de llevar a cabo la exportación del conjunto de datos depurado a CSV, la actividad planteaba reflexionar sobre la necesidad de eliminar o no la variable "**`id`**". Como puede observarse en las líneas de código anteriores, en este caso se ha optado por prescindir de ella. 
 
-Esta decisión se basa en que dicha variable actúa únicamente como un identificador de cada observación y, por tanto, no aporta información relevante de cara a análisis posteriores. Por otro lado, desde un punto de vista ético, mantener en el conjunto de datos identificadores asociados a registros médicos puede suponer un riesgo en términos de privacidad, especialmente si estos pudieran permitir la asocación de las observaciones con pacientes concretos.
+Esta decisión se basa en que dicha variable actúa únicamente como un identificador de cada observación y, por tanto, no aporta información relevante de cara a análisis posteriores. Por otro lado, desde un punto de vista ético, mantener en el conjunto de datos identificadores asociados a registros médicos puede suponer un riesgo en términos de privacidad, especialmente si estos pudieran permitir la asociación de las observaciones con pacientes concretos.
 
 # Sección 2: Estructuras de datos y manipulación avanzada
 
@@ -301,7 +310,7 @@ stats_size_uni <- c(
 stats_size_uni
 ```
 
-Tal y como pude observarse, la **media** obtenida para la variable "**`size_uni`**" es **3.15**, mientras que la **mediana** es **1**. La diferencia entre ambos valores indica que **la distribución no parece ser simétrica**. Para que una distribución seaaproximadamente simétrica se debe cumplir que la media y la mediana sean bastante similares, algo que en este caso no ocurre.
+Tal y como puede observarse, la **media** obtenida para la variable "**`size_uni`**" es **3.15**, mientras que la **mediana** es **1**. La diferencia entre ambos valores indica que **la distribución no parece ser simétrica**. Para que una distribución sea aproximadamente simétrica se debe cumplir que la media y la mediana sean bastante similares, algo que en este caso no ocurre.
 
 ## Creación y tipología de la variable categórica "**`high_mitosis`**"
 
@@ -387,7 +396,7 @@ lm_r2 <- round(summary(linear_model)$r.squared, 3)
 summary(linear_model)
 ```
 
-En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a "**`size_uni`**" es 0.698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. 
+En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0.698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. 
 
 A continuación, se representa la nube de puntos con la recta de regresión superpuesta. Para ello, se emplea el paquete **`ggplot2`**: 
 
@@ -470,7 +479,7 @@ El test de Shapiro-Wilk da como resultado un *p-valor* muy pequeño (p < 2,2e-16
 
 En este último apartado, se lleva a cabo la visualización en una misma ventana de un histograma de la variable "**`mitosis`**" y un boxplot de "**`thickness`**" según la "**`class`**". Para ello, se emplea el paquete **`ggplot2`** y el paquete **`gridExtra`**:
 
-```{r, fig.cap="Gráfico Q-Q de los residuos del modelo.", dev="cairo_pdf", fig.width=10, fig.height=5, out.width="\\linewidth", fig.pos="H"}
+```{r, fig.cap="Histograma de la variable mitosis y boxplot de la variable thickness según class.", dev="cairo_pdf", fig.width=10, fig.height=5, out.width="\\linewidth", fig.pos="H"}
 # Cargar librerías
 library(ggplot2)
 library(gridExtra)
