@@ -396,7 +396,7 @@ lm_r2 <- round(summary(linear_model)$r.squared, 3)
 summary(linear_model)
 ```
 
-En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0.698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. Por lo tanto, el modelo explica parcialmente la variabilidad pero no es suficiente por sí solo para una predicción precisa.
+En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0,698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. Por lo tanto, el modelo explica parcialmente la variabilidad pero no es suficiente por sí solo para una predicción precisa.
 
 A continuación, se representa la nube de puntos con la recta de regresión superpuesta. Para ello, se emplea el paquete **`ggplot2`**: 
 
