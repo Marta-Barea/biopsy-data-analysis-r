@@ -465,7 +465,7 @@ ggplot(data.frame(lm_residuals), aes(sample = lm_residuals)) +
   )
 ```
 
-A la vista de los resultados del gráfico Q-Q se puede observar que los residuos se alinean razonablemente con la recta de referencia en la zona central, mientras que en los extremos se aprecian desviaciones, sugierendo posibles discrepancias respecto a la normalidad.
+A la vista de los resultados del gráfico Q-Q se puede observar que los residuos se alinean razonablemente con la recta de referencia en la zona central, mientras que en los extremos se aprecian desviaciones, sugiriendo posibles discrepancias respecto a la normalidad.
 
 Para contrastar la normalidad el test más habitual es el de **Shapiro-Wilk**. Para ello, se emplea la función **`shapiro.test()`** del paquete **`stats`**: 
 
