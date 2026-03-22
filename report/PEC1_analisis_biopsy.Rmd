@@ -38,7 +38,7 @@ La memoria se estructura en **cuatro secciones**. En primer lugar, la primera se
 
 A continuación, en la tercera sección, se aplican **técnicas de estadística descriptiva y análisis de relaciones entre variables**. Finalmente, la última sección se centra en la **visualización de los datos y en la construcción de un modelo de regresión lineal**, con el fin de explorar posibles relaciones entre las variables analizadas.
 
-El código relativo a los resultados presentados en esta memoria se encuentra disponible para su consulta en el **repositorio de público de GitHub** [biopsy-data-analysis-r](https://github.com/Marta-Barea/biopsy-data-analysis-r) asociado al trabajo. Asimismo, la **portada** y **tabla de contenidos** incluidas en el presente documento se han elaborado atendiendo a las especificiaciones estabelecida en el **ejercicio 1.1 de la seccion 1 de la PEC1**. Es decir, cabecera que incluya título, autor, fecha y tabla de contenidos (`toc`: *`true`*). Concretamente, de la siguiente manera: 
+El código relativo a los resultados presentados en esta memoria se encuentra disponible para su consulta en el **repositorio de público de GitHub** [biopsy-data-analysis-r](https://github.com/Marta-Barea/biopsy-data-analysis-r) asociado al trabajo. Asimismo, la **portada** y **tabla de contenidos** incluidas en el presente documento se han elaborado atendiendo a las especificaciones establecidas en el **ejercicio 1.1 de la sección 1 de la PEC1**. Es decir, cabecera que incluya título, autor, fecha y tabla de contenidos (`toc`: *`true`*). Concretamente, de la siguiente manera: 
 
 ```yaml
 ---
@@ -178,7 +178,7 @@ n_removed <- nrow(biopsy) - nrow(biopsy_clean)
 n_removed
 ```
 
-Como se puede comprobar a través de la salida, el nuevo conjunto de datos *`biopsy_clean`* no presenta valores perdidos y, concretamente **se han eliminado un total de 16 filas**.
+Como se puede comprobar a través de la salida, el nuevo conjunto de datos *`biopsy_clean`* no presenta valores perdidos y, concretamente, **se han eliminado un total de 16 filas**.
 
 En el caso concreto del conjunto de datos *`biopsy`*, la eliminación de casos completos no debe suponer un problema relevante, ya que, tal y como se vio anteriormente, el porcentaje de valores perdidos en este caso es muy reducido (0,2%) y, además, se encuentran concentrados únicamente en la variable "**`bare_nuclei`**". En este sentido, al eliminar dichas observaciones se estaría perdiendo una fracción muy pequeña de la muestra, lo que no debe producir un impacto significativo en términos de representatividad y, por tanto, no debería implicar alteraciones en los resultados posteriores del análisis. Sin embargo, si se hubiera dado una proporción mayor de valores perdidos o estos se hubieran encontrado distribuidos en múltiples variables, la eliminación de casos completos si podría afectar al tamaño muestral e introducir sesgos en el análisis. En este caso, sería necesario plantear otras estrategias más adecuadas como, por ejemplo, la aplicación de metodologías de imputación de variables.
 
@@ -215,7 +215,7 @@ biopsy_check <- read.csv("../data/biopsy_clean.csv")
 names(biopsy_check)
 ```
 
-A la hora de llevar a cabo la exportación del conjunto de datos depurado a CSV, la actividad planteaba reflexionar sobre la necesidad de eliminar o no la variable "**`id`**". Como puede observarse en las líneas de código anteriores, en este caso se ha optado por prescindir de ella. 
+A la hora de llevar a cabo la exportación del conjunto de datos depurado a **`csv`**, la actividad planteaba reflexionar sobre la necesidad de eliminar o no la variable "**`id`**". Como puede observarse en las líneas de código anteriores, en este caso se ha optado por prescindir de ella. 
 
 Esta decisión se basa en que dicha variable actúa únicamente como un identificador de cada observación y, por tanto, no aporta información relevante de cara a análisis posteriores. Por otro lado, desde un punto de vista ético, mantener en el conjunto de datos identificadores asociados a registros médicos puede suponer un riesgo en términos de privacidad, especialmente si estos pudieran permitir la asociación de las observaciones con pacientes concretos.
 
@@ -290,7 +290,7 @@ En segundo lugar, se incorpora una imagen histológica relacionada con el cánce
 knitr::include_graphics("../images/breast_cancer_cells.jpg")
 ```
 
-# Sección 3: Estructuras de datos y manipulación avanzada
+# Sección 3: Estadística descriptiva y contrastes
 
 En esta sección se presenta la resolución de los **ejercicios 3.1 a 3.4** correspondientes a la **Sección 3 de la PEC1**.
 
@@ -322,7 +322,7 @@ library(dplyr)
 
 # Crear variable 'high_mitosis' 
 biopsy_clean <- biopsy_clean %>%
-  mutate(high_mitosis = if_else(mitosis > 5, "yes", "no"))
+  mutate(high_mitosis = factor(if_else(mitosis > 5, "yes", "no")))
 
 # Comprobar creación de la variable y tipología
 str(biopsy_clean$high_mitosis)
@@ -396,7 +396,7 @@ lm_r2 <- round(summary(linear_model)$r.squared, 3)
 summary(linear_model)
 ```
 
-En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0.698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. 
+En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0.698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. Por lo tanto, el modelo explica parcialmente la variabilidad pero no es suficiente por sí solo para una predicción precisa.
 
 A continuación, se representa la nube de puntos con la recta de regresión superpuesta. Para ello, se emplea el paquete **`ggplot2`**: 
 
@@ -441,7 +441,7 @@ ggplot(biopsy_clean, aes(x = thickness, y = size_uni)) +
 
 En el gráfico de dispersión se observa una tendencia positiva entre "**`thickness`**" y "**`size_uni`**". La recta de regresión sigue la dirección general de los puntos, aunque existe cierta dispersión alrededor de ella, indicando que la relación no es perfecta. En general, el ajuste puede considerarse razonable, aunque parte de la variabilidad de "**`size_uni`**" probablemente dependa de otras variables que no se han incluido en este modelo.
 
-## Evaluación de la normalidad de los residuos del model
+## Evaluación de la normalidad de los residuos del modelo
 
 Se procede a generar un gráfico para evaluar la normalidad de los residuos. Para ello, emplearemos la función **`residuals()`** del paquete **`stats`** y el paquete **`ggplot2`**:
 
@@ -465,7 +465,7 @@ ggplot(data.frame(lm_residuals), aes(sample = lm_residuals)) +
   )
 ```
 
-A la vista de los resultados del gráfico Q-Q se puede observar que los puntos siguen aproximadamente la línea de referencia en la parte central, aunque se aprecian desviaciones en los extremos. Esto sugiere que los residuos se aproximan a una distribución normal, pero no la siguen de forma perfecta.
+A la vista de los resultados del gráfico Q-Q se puede observar que los residuos se alinean razonablemente con la recta de referencia en la zona central, mientras que en los extremos se aprecian desviaciones, sugierendo posibles discrepancias respecto a la normalidad.
 
 Para contrastar la normalidad el test más habitual es el de **Shapiro-Wilk**. Para ello, se emplea la función **`shapiro.test()`** del paquete **`stats`**: 
 
@@ -473,7 +473,9 @@ Para contrastar la normalidad el test más habitual es el de **Shapiro-Wilk**. P
 # Test de normalidad Shapiro-Wilk
 shapiro.test(lm_residuals)
 ```
-El test de Shapiro-Wilk da como resultado un *p-valor* muy pequeño (p < 2,2e-16), por lo que se rechaza la hipótesis de normalidad. Considerando conjuntamente el resultado del test y el gráfico, puede concluirse que los residuos no siguen exactamente una distribución normal, aunque la forma general se aproxima a ella en la zona central.
+El test de Shapiro-Wilk da como resultado un *p-valor* muy pequeño (p < 2,2e-16), por lo que se rechaza la hipótesis de normalidad. 
+
+Considerando conjuntamente el resultado del test y el gráfico, puede concluirse que los residuos no siguen una distribución normal.
 
 ## Distribución de mitosis y comparación de "**`thickness`**" según la clase
 
