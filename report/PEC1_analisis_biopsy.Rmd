@@ -38,7 +38,7 @@ La memoria se estructura en **cuatro secciones**. En primer lugar, la primera se
 
 A continuación, en la tercera sección, se aplican **técnicas de estadística descriptiva y análisis de relaciones entre variables**. Finalmente, la última sección se centra en la **visualización de los datos y en la construcción de un modelo de regresión lineal**, con el fin de explorar posibles relaciones entre las variables analizadas.
 
-El código relativo a los resultados presentados en esta memoria se encuentra disponible para su consulta en el **repositorio de público de GitHub** [biopsy-data-analysis-r](https://github.com/Marta-Barea/biopsy-data-analysis-r) asociado al trabajo. Asimismo, la **portada** y **tabla de contenidos** incluidas en el presente documento se han elaborado atendiendo a las especificaciones establecidas en el **ejercicio 1.1 de la sección 1 de la PEC1**. Es decir, cabecera que incluya título, autor, fecha y tabla de contenidos (`toc`: *`true`*). Concretamente, de la siguiente manera: 
+El código relativo a los resultados presentados en esta memoria se encuentra disponible para su consulta en el **repositorio de público de GitHub** \href{https://github.com/Marta-Barea/biopsy-data-analysis-r}{\textcolor{uocblue}{biopsy-data-analysis-r}} asociado al trabajo. Asimismo, la **portada** y **tabla de contenidos** incluidas en el presente documento se han elaborado atendiendo a las especificaciones establecidas en el **ejercicio 1.1 de la sección 1 de la PEC1**. Es decir, cabecera que incluya título, autor, fecha y tabla de contenidos (`toc`: *`true`*). Concretamente, de la siguiente manera: 
 
 ```yaml
 ---
@@ -286,7 +286,7 @@ donde $\bar{x}$ es la media, $x_i$ cada observación y $n$ el número total de o
 
 En segundo lugar, se incorpora una imagen histológica relacionada con el cáncer de mama con el fin de ilustrar el tipo de tejido celular:
 
-```{r fig.cap="Imagen histológica de células de cáncer de mama observadas al microscopio.\\\\[6pt] \\centering \\footnotesize\\textit{Fuente externa: Agencia SINC (2023). \\href{https://www.agenciasinc.es/Noticias/Identifican-como-las-celulas-tumorales-del-cancer-de-mama-se-liberan-y-forman-metastasis}{Ver artículo}}", echo=FALSE, out.width="0.6\\linewidth", fig.align="center", fig.pos="H"}
+```{r fig.cap="Imagen histológica de células de cáncer de mama observadas al microscopio.\\\\[6pt] \\centering \\footnotesize\\textit{Fuente externa: Agencia SINC (2023). \\href{https://www.agenciasinc.es/Noticias/Identifican-como-las-celulas-tumorales-del-cancer-de-mama-se-liberan-y-forman-metastasis}{\\textcolor{uocblue}{Ver artículo}}}", echo=FALSE, out.width="0.6\\linewidth", fig.align="center", fig.pos="H"}
 knitr::include_graphics("../images/breast_cancer_cells.jpg")
 ```
 
