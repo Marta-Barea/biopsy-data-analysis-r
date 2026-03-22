@@ -1,0 +1,36 @@
+# --- R Markdown / Knitr ---
+# Ignorar los documentos generados
+*.html
+*.pdf
+*.docx
+*.tex
+
+# Archivos de caché y figuras generadas por knitr
+*_files/
+*_cache/
+.cache/
+
+# --- RStudio ---
+# Archivos de proyecto y configuración
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# --- R General ---
+# Entornos y temporales
+.Renviron
+*.Rproj
+.Rprofile
+
+# --- Opcionales pero recomendados ---
+# Si usas renv para gestionar paquetes
+renv/
+# Ignorar archivos de datos pesados (ajustar según necesidad)
+# *.csv
+# *.xlsx
+# /data/raw/*
+
+# --- OS ---
+.DS_Store
+Thumbs.db
