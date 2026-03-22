@@ -375,7 +375,9 @@ ggplot(biopsy_clean, aes(x = size_uni, y = shape_uni, color = class)) +
   theme_minimal()
 ```
 
-En el gráfico se observa que los casos benignos tienden a concentrarse en valores bajos de "**`size_uni`**" y "**`shape_uni`**", mientras que los casos malignos aparecen con mayor frecuencia a valores más altos. No obstante, existe cierto solapamiento entre ambas clases. 
+En este caso, como las variables analizadas son numéricas discretas que van del 0 al 10, a la hora de realizar la representanción gráfica muchos de los puntos se acumulan y dan lugar a una estructura "escalonada". Para que se aprecie mejor dónde se concentran los datos, se ha usado se ha usado "**`geom_jitter()`**" , que separa un poco los puntos y facilita la visualización.
+
+A la vista de los resultados obtenidos, se puede observar que los casos benignos tienden a concentrarse en valores bajos de "**`size_uni`**" y "**`shape_uni`**", mientras que los casos malignos aparecen con mayor frecuencia a valores más altos. No obstante, existe cierto solapamiento entre ambas clases. 
 
 ## Modelo de regresión lineal para predecir "**`size_uni`**" a partir de "**`thickness`**"
 
@@ -396,7 +398,7 @@ lm_r2 <- round(summary(linear_model)$r.squared, 3)
 summary(linear_model)
 ```
 
-En vista a los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0,698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. Por lo tanto, el modelo explica parcialmente la variabilidad pero no es suficiente por sí solo para una predicción precisa.
+A la vista de los resultados, se puede comprobar que existe una relación positiva entre ambas variables, ya que el coeficiente asociado a la variable explicativa "**`thickness`**" es 0,698. Esto significa que, en general, cuando aumenta "**`thickness`**", también tiende a aumentar "**`size_uni`**". Por otro lado, el **coeficiente de determinación** es 0,4128, lo que indica que aproximadamente el 41% de la variabilidad de "**`size_uni`**" puede explicarse a partir de "**`thickness`**" en este modelo. Por lo tanto, el modelo explica parcialmente la variabilidad pero no es suficiente por sí solo para una predicción precisa.
 
 A continuación, se representa la nube de puntos con la recta de regresión superpuesta. Para ello, se emplea el paquete **`ggplot2`**: 
 
