@@ -1,10 +1,4 @@
 # --- R Markdown / Knitr ---
-# Ignorar los documentos generados
-*.html
-*.pdf
-*.docx
-*.tex
-
 # Archivos de caché y figuras generadas por knitr
 *_files/
 *_cache/
