@@ -15,7 +15,7 @@ The repository is organized as follows:
 * `data/`
   Contains the processed dataset used in the analysis.
 
-* `images/`
+* `assets/images/`
   Stores figures or external images used in the report.
 
 * `report/`
